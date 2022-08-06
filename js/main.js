@@ -1574,7 +1574,7 @@ async function connect() {
         method: "eth_requestAccounts",
       });
       window.address = accounts[0];
-      document.getElementById("address").textContent = accounts[0];
+      document.getElementById("address").textContent = `Your address: ${accounts[0]}`;
       window.web3 = new Web3(window.ethereum);
       window.contract = new web3.eth.Contract(abi, address);
 
@@ -1592,11 +1592,7 @@ async function loadInfo() {
     window.info = await window.contract.methods.getInfo().call();
     console.log(info);
     document.getElementById("price").innerText =
-      info.runtimeConfig.publicMintPrice + " wei";
-    document.getElementById("price").href =
-      info.runtimeConfig.publicMintPrice;
-    document.getElementById("maxAmount").innerText =
-      info.runtimeConfig.tokensPerMint;
+      info.runtimeConfig.publicMintPrice/1000000000000000000 + " MATIC";
   }
 
 async function mint() {
@@ -1610,3 +1606,45 @@ async function mint() {
 }
 
 connect();
+
+$(document).ready(function() {
+  $('#mint-link').click(function(e) {
+    e.preventDefault();
+
+    $('html, body').animate({
+      scrollTop: $('#mint').offset().top - 150
+    }, 500);
+  });
+  
+  $('#avatar-link').click(function(e) {
+    e.preventDefault();
+
+    $('html, body').animate({
+      scrollTop: $('#avatar').offset().top - 150
+    }, 500);
+  });
+  
+  $('#team-link').click(function(e) {
+    e.preventDefault();
+
+    $('html, body').animate({
+      scrollTop: $('#team').offset().top - 150
+    }, 500);
+  });
+
+  $('#roadmap-link').click(function(e) {
+    e.preventDefault();
+
+    $('html, body').animate({
+      scrollTop: $('#timeline').offset().top - 150
+    }, 500);
+  });
+
+  $('#faq-link').click(function(e) {
+    e.preventDefault();
+
+    $('html, body').animate({
+      scrollTop: $('#faq').offset().top - 150
+    }, 500);
+  });
+});
